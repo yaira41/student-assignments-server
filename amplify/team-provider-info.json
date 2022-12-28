@@ -1,0 +1,26 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplifye09b927d851d4-staging-184528-authRole",
+      "UnauthRoleArn": "arn:aws:iam::473405714515:role/amplify-amplifye09b927d851d4-staging-184528-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::473405714515:role/amplify-amplifye09b927d851d4-staging-184528-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-amplifye09b927d851d4-staging-184528-deployment",
+      "UnauthRoleName": "amplify-amplifye09b927d851d4-staging-184528-unauthRole",
+      "StackName": "amplify-amplifye09b927d851d4-staging-184528",
+      "StackId": "arn:aws:cloudformation:eu-west-1:473405714515:stack/amplify-amplifye09b927d851d4-staging-184528/22f92630-83bb-11ed-b510-022a5ed814c1",
+      "AmplifyAppId": "d31grazh94e26k"
+    },
+    "categories": {
+      "function": {
+        "studentassignmentscl86355c74": {
+          "deploymentBucketName": "amplify-amplifye09b927d851d4-staging-184528-deployment",
+          "s3Key": "amplify-builds/studentassignmentscl86355c74-5552674f4a494d706242-build.zip"
+        }
+      },
+      "api": {
+        "studentsapi": {}
+      }
+    }
+  }
+}
