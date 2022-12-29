@@ -1,0 +1,12 @@
+{
+  "httpMethod": "GET",
+  "path": "/api/Students/Student/327713640",
+  "queryStringParameters": {
+    "name": "כהן הודיה",
+    "classroom": "יב2"
+  },
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{\"msg\":\"Hello from the event.json body\"}"
+}

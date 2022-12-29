@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "paths": {
+    "/api/Students/{id}": {
+      "name": "/api/Students/Student/{id}",
+      "lambdaFunction": "studentassignmentscl86355c74",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/api/Subjects/{id}": {
+      "name": "/api/Subjects/{id}",
+      "lambdaFunction": "studentassignmentscl86355c74",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/api/Class/{id}": {
+      "name": "/api/Class/{id}",
+      "lambdaFunction": "studentassignmentscl86355c74",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/api/Classes": {
+      "name": "/api/Classes",
+      "lambdaFunction": "studentassignmentscl86355c74",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/": {
+      "name": "/",
+      "lambdaFunction": "studentassignmentscl86355c74",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

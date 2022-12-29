@@ -1,12 +1,16 @@
-const express = require("express");
+const express = require('express')
 const cors = require("cors");
-const app = express();
+const bodyParser = require('body-parser')
 const utils = require("./utils/utils.js");
-const errorNotFound = "The post with the given ID was not found";
 
+const app = express()
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
+
+const errorNotFound = "The post with the given ID was not found";
 
 app.route("/").get((req, res) => {
   res.write("hello");
@@ -31,10 +35,10 @@ app
       ? res.status(200).send("post has been deleted!")
       : res.status(404).send(errorNotFound);
   })
-  .post((req, res) => {
+  .post(async (req, res) => {
     if (req.params.id) {
       let data = req.body.data;
-      utils.writeNewData(req.params.id, data);
+      await utils.writeNewData(req.params.id, data);
       res.status(200).send();
     } else {
       let post = PostList.updatePost(req);
@@ -43,14 +47,14 @@ app
     }
   });
 
-app.route("/api/Students/Student/:id").get((req, res) => {
+app.route("/api/Students/Student/:id").get(async (req, res) => {
   const student = {
     id: req.params.id,
     name: req.query.name,
     classroom: req.query.classroom,
   };
 
-  const data = utils.readData(student.classroom);
+  const data = await utils.readData(student.classroom);
   const studentDetails = data.find(
     (e) => e["ת.ז."] == student.id && e["שם פרטי"] === student.name
   );
@@ -62,12 +66,10 @@ app.route("/api/Students/Student/:id").get((req, res) => {
   delete studentDetails["__EMPTY"];
   const studentKeys = Object.keys(studentDetails);
 
-  const asdasd = utils.getRelevantSubjects(studentKeys, data);
-  asdasd.push(studentDetails);
-  console.log(asdasd);
+  const relevantSubjects = utils.getRelevantSubjects(studentKeys, data);
+  relevantSubjects.push(studentDetails);
 
-  res.send(asdasd);
-  // : res.status(404).send(errorNotFound);
+  res.send(relevantSubjects);
 });
 
 app.route("/api/Subjects/:id").get((req, res) => {
@@ -75,6 +77,13 @@ app.route("/api/Subjects/:id").get((req, res) => {
   student ? res.send(student) : res.status(404).send(errorNotFound);
 });
 
-const port = process.env.PORT || 3030;
 
-app.listen(port, () => console.log(`listening on port ${port}...`));
+
+app.listen(3000, function() {
+    console.log("App started")
+});
+
+// Export the app object. When executing the application local this does nothing. However,
+// to port it to AWS Lambda we will create a wrapper around that will load the app from
+// this file
+module.exports = app
