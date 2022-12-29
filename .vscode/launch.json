@@ -1,0 +1,13 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Debug Function",
+			"type": "node",
+			"program": "${workspaceFolder}/.vscode/debug.js",
+			"request": "launch",
+			"skipFiles": ["<node_internals>/**"],
+			"console": "integratedTerminal"
+		}
+	]
+}

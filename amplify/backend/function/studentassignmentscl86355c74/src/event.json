@@ -1,8 +1,9 @@
 {
-  "httpMethod": "POST",
-  "path": "/item",
+  "httpMethod": "GET",
+  "path": "/api/Students/Student/327713640",
   "queryStringParameters": {
-    "limit": "10"
+    "name": "כהן הודיה",
+    "classroom": "יב2"
   },
   "headers": {
     "Content-Type": "application/json"

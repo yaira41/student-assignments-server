@@ -1,4 +1,9 @@
-const fs = require("fs");
+const AWS = require('aws-sdk');
+AWS.config.update({
+  region: 'eu-west-1',
+  apiVersion: "latest"
+})
+const s3 = new AWS.S3();
 
 const utils = (function () {
   return {
@@ -7,23 +12,23 @@ const utils = (function () {
     getRelevantSubjects,
   };
 
-  function writeNewData(path, data) {
-    // let parsedData = JSON.stringify(data, null, 2);
-    fs.writeFile(`./data/${path}.json`, data, (err) => {
-      if (err) throw err;
-      console.log("Data written to file");
-    });
+  async function writeNewData(path, data) {
+    const classBucketParams = {
+      Bucket: 'student-assignment-class-bucket', 
+      Key: `${path}.json`, 
+      Body: JSON.stringify(data)
+    }
+    await s3.putObject(classBucketParams).promise();
   }
 
-  function readData(path) {
-    // let rawdata = fs.readFileSync('student.json');
-    // let student = JSON.parse(rawdata);
-    // console.log(student);
+  async function readData(path) {
+    const classBucketParams = {Bucket: 'student-assignment-class-bucket', Key: `${path}.json`}
+    const response = await s3.getObject(classBucketParams).promise()
+    const fileContent = response.Body.toString('utf-8');
+    let fileContentObject = JSON.parse(fileContent);
+    console.log(fileContentObject);
 
-    let data = fs.readFileSync(`./data/${path}.json`);
-    let a = JSON.parse(data);
-    console.log(a);
-    return a;
+    return fileContentObject;
   }
 
   function getRelevantSubjects(keys, data) {
@@ -43,13 +48,6 @@ const utils = (function () {
 
   function getOnlySubjects(data) {
     return data.filter((raw) => !raw.hasOwnProperty("ת.ז."));
-  }
-
-  function checkIfMatch(arr1, arr2) {
-    for (let i = 0; i < arr1.length; i++) {
-      if (!arr2.includes(arr1[0])) return false;
-    }
-    return true;
   }
 })();
 
